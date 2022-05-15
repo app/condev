@@ -1,0 +1,27 @@
+#!/bin/bash
+
+fzf_git_list() {
+    local selections=$(
+      git ls-files | \
+      fzf --ansi \
+          --preview 'if ( command -v batcat >/dev/null); then
+                         batcat --color=always --theme="Solarized (dark)" --line-range :500 {1}
+                     else
+                         cat {1}
+                     fi'
+      )
+    if [[ -n $selections ]]; then
+        local selected="$selections"
+        READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
+        READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
+    fi
+}
+
+# Required to refresh the prompt after fzf
+bind -m emacs-standard '"\er": redraw-current-line'
+bind -m emacs-standard '"\e^": history-expand-line'
+
+# ctrl-o - Paste the selected file path into the command line
+if [ $BASH_VERSINFO -gt 3 ]; then
+  bind -m emacs-standard -x '"\C-o": "fzf_git_list"'
+fi

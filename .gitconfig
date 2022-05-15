@@ -1,0 +1,14 @@
+[alias]
+	ci = commit
+	cm = commit -m
+	st = status
+	co = checkout
+	wh = whatchanged
+	showchanges = show --pretty="format:" --name-only
+[push]
+	default = matching
+[color]
+	ui = true
+	status = auto
+[pull]
+	default = matching
