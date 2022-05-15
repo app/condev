@@ -6,6 +6,7 @@ ENV USER_HOME /home/${USER}
 
 RUN \
   apk add --update --no-cache \
+  ncurses-terminfo-base \
   bash \
   bash-completion \
   util-linux \
@@ -60,7 +61,7 @@ RUN echo "alias ll='ls -l'" >> ${USER_HOME}/.bashrc && \
   echo ". ~/.bash_prompt" >> ${USER_HOME}/.bashrc && \
   echo ". ~/.bash_git" >> ${USER_HOME}/.bashrc && \
   echo ". ~/.bash_locale" >> ${USER_HOME}/.bashrc && \
-  sed -i '1iexport TERM=tmux-256color' ${USER_HOME}/.bashrc
+  sed -i '1iexport TERM=xterm-256color' ${USER_HOME}/.bashrc
 
 RUN echo 'export LANG="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale && \
   echo 'export LC_ALL="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale && \
@@ -71,18 +72,21 @@ RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-${USER_HOME}/.local/share}"/nvim/site/aut
   --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 RUN chown -R ${USER}:${USER} ${USER_HOME}
+
+SHELL ["/bin/bash", "-c"]
+USER ${USER}
 RUN yarn global add \
   create-react-app \
   prettier \
   typescript-language-server \
   typescript \
+  diagnostic-languageserver \
   eslint
+RUN echo export PATH="\$(yarn global bin):\$PATH" >> ${USER_HOME}/.bashrc
 
-SHELL ["/bin/bash", "-c"]
-# USER root
-USER ${USER}
 WORKDIR ${USER_HOME}
 RUN nvim --headless +PlugInstall +qall 2> ${USER_HOME}/error.log
 # RUN /bin/bash -c '[ -f ~/.fzf.bash ] && source ~/.fzf.bash'
 
-CMD [ "/usr/bin/dumb-init", "--", "/bin/bash" ]
+ENTRYPOINT ["/bin/bash","-c"]
+CMD ["tmux -u new-session -s condev"]
