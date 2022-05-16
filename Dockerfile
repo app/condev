@@ -91,6 +91,4 @@ COPY .tmux_statusline ${USER_HOME}
 USER root
 RUN chown $USER.$USER start.sh .gitconfig .bash_prompt .bash_profile .bash_git \
       .tmux.conf .tmux_statusline
-ENTRYPOINT ["/bin/bash","-c"]
-# CMD ["tmux -u new-session -s condev"]
-CMD ["/home/node/start.sh"]
+ENTRYPOINT ["/home/node/start.sh"]

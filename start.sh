@@ -54,8 +54,6 @@ copy_files ()
 [ -n "$GIT_COMMITTER_NAME" ] || GIT_COMMITTER_NAME="app"
 [ -n "$GIT_AUTHOR_NAME" ] || GIT_AUTHOR_NAME="Andrey Paskal"
 [ -n "$EMAIL" ] || EMAIL="andrey@paskal.email"
-[ -n "$D" ] || D="D1"
-[ -n "$DD" ] || DD="DD1"
 
 VARS="\
   TERM=\"$TERM\" \
@@ -67,12 +65,9 @@ VARS="\
 "
 
 if [ $# -gt 0 ]; then
-  su -s /bin/bash -c "$VARS $@" - $UNAME
+  su $UNAME -c "export $VARS; $*"
 else
   copy_files
-  su -s /bin/bash -c "$VARS tmux -u new-session -s condev -c /bin/bash" - $UNAME
-  # echo "exiting ...1"
-  # pwd
-  # id
+  su $UNAME -c "$VARS tmux -u new-session -s condev"
 fi
 
