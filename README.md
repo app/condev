@@ -35,5 +35,5 @@ Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key 
 
 ### Screenshot  
 
-![image](https://user-images.githubusercontent.com/9341/173387681-6ed323d9-85a8-4fb0-a565-2598756a147d.png)
+![image](https://user-images.githubusercontent.com/9341/173394024-a12abbfb-13b0-4af9-b2b8-366acf93cc9b.png)
 
