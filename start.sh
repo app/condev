@@ -48,7 +48,7 @@ copy_files ()
   fi
 }
 
-# Default values
+# Default values if not defined
 [ -n "$TERM" ] || TERM="xterm-256color"
 [[ "$TERM" == "xterm" ]] && TERM="xterm-256color"
 [ -n "$GIT_COMMITTER_NAME" ] || GIT_COMMITTER_NAME="app"
@@ -62,10 +62,12 @@ VARS="\
   EMAIL=\"$EMAIL\" \
   USERID=\"$USERID\" \
   SSH_AUTH_SOCK=\"$SSH_AUTH_SOCK\" \
+  PATH=\"/home/node/.yarn/bin:$PATH\" \
 "
 
+CMD="$*"
 if [ $# -gt 0 ]; then
-  su $UNAME -c "export $VARS; $*"
+  su $UNAME -c "export $VARS; $CMD"
 else
   copy_files
   su $UNAME -c "$VARS tmux -u new-session -s condev"
