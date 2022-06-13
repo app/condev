@@ -39,18 +39,6 @@ RUN \
   util-linux \
   yarn
 
-RUN echo "alias ll='ls -l'" >> ${USER_HOME}/.bashrc && \
-  echo "alias la='ls -la'" >> ${USER_HOME}/.bashrc && \
-  echo "alias vim='nvim'" >> ${USER_HOME}/.bashrc && \
-  echo ". ~/.bash_prompt" >> ${USER_HOME}/.bashrc && \
-  echo ". ~/.bash_git" >> ${USER_HOME}/.bashrc && \
-  echo ". ~/.bash_locale" >> ${USER_HOME}/.bashrc && \
-  sed -i '1iexport TERM=xterm-256color' ${USER_HOME}/.bashrc
-
-RUN echo 'export LANG="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale && \
-  echo 'export LC_ALL="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale && \
-  echo 'export LANGUAGE="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale
-
 # Install neovim config
 RUN git clone  https://github.com/app/nvim.lua.git ${USER_HOME}/.config/nvim
 # Install neovim plugin manager 'vim-plug'
@@ -69,8 +57,6 @@ RUN yarn global add \
   typescript \
   diagnostic-languageserver \
   eslint
-# Add path to above installed executables
-RUN echo export PATH="\$(yarn global bin):\$PATH" >> ${USER_HOME}/.bashrc
 
 WORKDIR ${USER_HOME}
 # Install neovim plugins with vim-plug manager command PlugInstall
@@ -82,10 +68,12 @@ COPY .bash_profile ${USER_HOME}
 COPY .bash_git ${USER_HOME}
 COPY .tmux.conf ${USER_HOME}
 COPY .tmux_statusline ${USER_HOME}
+COPY .bash_locale ${USER_HOME}
+COPY .bashrc ${USER_HOME}
 
 USER root
 # Add 'vim' command alias
 RUN ln -s /usr/bin/nvim /usr/bin/vim
 RUN chown $USER.$USER start.sh .gitconfig .bash_prompt .bash_profile .bash_git \
-      .tmux.conf .tmux_statusline
+      .tmux.conf .tmux_statusline .bash_locale .bashrc
 ENTRYPOINT ["/home/node/start.sh"]
