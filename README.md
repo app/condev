@@ -31,4 +31,9 @@ condev nvim [localFilename]
 ```
 
 You are ready for development with git, nvim, node, yarn, ag, jq, fzf commands available  
-Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings
+Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings  
+
+### Screenshot  
+
+![image](https://user-images.githubusercontent.com/9341/173385849-6e92f658-22b1-48e1-a91c-74b80937d888.png)
+
