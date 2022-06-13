@@ -4,8 +4,8 @@ fzf_git_list() {
     local selections=$(
       git ls-files | \
       fzf --ansi \
-          --preview 'if ( command -v batcat >/dev/null); then
-                         batcat --color=always --theme="Solarized (dark)" --line-range :500 {1}
+          --preview 'if ( command -v bat >/dev/null); then
+                         bat --color=always --theme="Solarized (dark)" --style=numbers --line-range :500 {1}
                      else
                          cat {1}
                      fi'
