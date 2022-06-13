@@ -7,7 +7,7 @@ applications development with opinionated Neovim code editor LSP Lua setup
 
 You can run this image with docker command
 
-```
+```bash
 # Lets make alias condev first
 alias condev='docker run -it --rm \
   --name condev \
