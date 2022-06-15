@@ -11,12 +11,13 @@ You can run this image with docker command
 # Lets make alias condev first
 alias condev='docker run -it --rm \
   -h condev \
-  -v "$(pwd):/condev/$(pwd)" \
   -p 127.0.0.1:3000:3000/tcp \
   -p 127.0.0.1:3080:3080/tcp \
   -w /condev/$(pwd) \
-  -e USERID=$UID \
+  -v "$(pwd):/condev/$(pwd)" \
+  -v "$SSH_AUTH_SOCK:$SSH_AUTH_SOCK" \
   -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK \
+  -e USERID=$UID \
   -e GIT_COMMITTER_NAME="author" \
   -e GIT_AUTHOR_NAME="author" \
   -e EMAIL=author@condev.js \
