@@ -47,8 +47,18 @@ copy_files ()
       echo 'export LANGUAGE="en_US.UTF-8"' >> ${UHOME}/.bash_locale
 
     cd "${UHOME}"
-    chown -R $UNAME.$UNAME .gitconfig .bash_prompt .bash_profile .bash_git \
-      .tmux.conf .tmux_statusline .local/share/nvim .config/nvim
+    chown -R $UNAME.$UNAME \
+      .bash_git \
+      .bash_locale \
+      .bash_profile \
+      .bash_prompt \
+      .bashrc \
+      .config \
+      .gitconfig \
+      .local \
+      .tmux.conf \
+      .tmux_statusline \
+      condev.log
     cd $CURDIR
   fi
 }

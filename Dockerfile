@@ -9,29 +9,20 @@ RUN \
   bash \
   bash-completion \
   bat \
-  bzip2 \
   ca-certificates \
   curl \
-  dumb-init \
-  file \
   fzf \
-  gcc g++ make \
+  gcc g++ \
   git \
-  gnupg \
   grep \
   gzip \
   jq \
   less \
+  make \
   ncurses-terminfo-base \
   neovim \
   nodejs-current \
   npm \
-  openssh \
-  perl \
-  py3-pynvim \
-  python3 \
-  rsyslog \
-  sudo \
   the_silver_searcher \
   tmux \
   tree \
@@ -60,20 +51,18 @@ RUN yarn global add \
 
 WORKDIR ${USER_HOME}
 # Install neovim plugins with vim-plug manager command PlugInstall
-RUN nvim --headless +PlugInstall +qall 2> ${USER_HOME}/error.log
-COPY start.sh ${USER_HOME}
-COPY .gitconfig ${USER_HOME}
-COPY .bash_prompt ${USER_HOME}
-COPY .bash_profile ${USER_HOME}
-COPY .bash_git ${USER_HOME}
-COPY .tmux.conf ${USER_HOME}
-COPY .tmux_statusline ${USER_HOME}
-COPY .bash_locale ${USER_HOME}
-COPY .bashrc ${USER_HOME}
+RUN nvim --headless +PlugInstall +qall 2> ${USER_HOME}/condev.log
+COPY --chown=$USER:$USER start.sh ${USER_HOME}
+COPY --chown=$USER:$USER .gitconfig ${USER_HOME}
+COPY --chown=$USER:$USER .bash_prompt ${USER_HOME}
+COPY --chown=$USER:$USER .bash_profile ${USER_HOME}
+COPY --chown=$USER:$USER .bash_git ${USER_HOME}
+COPY --chown=$USER:$USER .tmux.conf ${USER_HOME}
+COPY --chown=$USER:$USER .tmux_statusline ${USER_HOME}
+COPY --chown=$USER:$USER .bash_locale ${USER_HOME}
+COPY --chown=$USER:$USER .bashrc ${USER_HOME}
 
 USER root
 # Add 'vim' command alias
 RUN ln -s /usr/bin/nvim /usr/bin/vim
-RUN chown $USER.$USER start.sh .gitconfig .bash_prompt .bash_profile .bash_git \
-      .tmux.conf .tmux_statusline .bash_locale .bashrc
 ENTRYPOINT ["/home/node/start.sh"]
