@@ -10,7 +10,6 @@ You can run this image with docker command
 ```bash
 # Lets make alias condev first
 alias condev='docker run -it --rm \
-  --name condev \
   -h condev \
   -v "$(pwd):/condev/$(pwd)" \
   -p 127.0.0.1:3000:3000/tcp \
@@ -27,13 +26,12 @@ alias condev='docker run -it --rm \
 condev
 
 # To use container as preconfigured neovim only
-condev nvim [localFilename]
+condev nvim [filenameInsideCurrentDirectory]
 ```
 
 You are ready for development with git, nvim, node, yarn, ag, jq, fzf commands available  
-Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings  
+Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings
 
-### Screenshot  
+### Screenshot
 
 ![image](https://user-images.githubusercontent.com/9341/173394024-a12abbfb-13b0-4af9-b2b8-366acf93cc9b.png)
-
