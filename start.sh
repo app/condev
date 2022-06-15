@@ -4,7 +4,8 @@ set -e
 # Default user is node
 [ -n "$USERID" ] || USERID=`id -u node`
 
-# Switch to user with same UID as host user; Create user if needed
+# UID mapping
+# Switch to container user with host user UID; Create container user if needed
 if ( grep ":$USERID:" /etc/passwd > /dev/null  ); then
   UNAME=` grep ":$USERID:" /etc/passwd| awk -F ':' '{print $1}'|head -n1`
 else
@@ -14,37 +15,41 @@ fi
 
 copy_files ()
 {
+  echo "Detected user name is $UNAME" >> /home/$UNAME/condev.log
   if [[ ! "$UNAME" == "node" ]]; then
     COPY=cp
-    USER_HOME="/home/$UNAME"
-    [[ "$UNAME" -eq "root" ]] && USER_HOME="/root"
-    mkdir -p "${USER_HOME}/.config"
-    mkdir -p "${USER_HOME}/.local/share/nvim/site/autoload"
+    UHOME="/home/$UNAME"
+    [[ "$UNAME" == "root" ]] && UHOME="/root"
+    echo "Start file creation in user's home directory ${UHOME}" >> /home/$UNAME/condev.log
+    mkdir -p "${UHOME}/.config"
+    mkdir -p "${UHOME}/.local/share/nvim/site/autoload"
+    CURDIR=`pwd`
     cd /home/node
     $COPY .local/share/nvim/site/autoload/plug.vim \
-      "${USER_HOME}/.local/share/nvim/site/autoload/plug.vim"
-    $COPY -r .config/nvim "${USER_HOME}/.config/"
-    $COPY .gitconfig "${USER_HOME}"
-    $COPY .bash_prompt "${USER_HOME}"
-    $COPY .bash_profile "${USER_HOME}"
-    $COPY .bash_git "${USER_HOME}"
-    $COPY .tmux.conf "${USER_HOME}"
-    $COPY .tmux_statusline "${USER_HOME}"
-    echo "alias ll='ls -l'" >> ${USER_HOME}/.bashrc && \
-      echo "alias la='ls -la'" >> ${USER_HOME}/.bashrc && \
-      echo "alias vim='nvim'" >> ${USER_HOME}/.bashrc && \
-      echo ". ~/.bash_prompt" >> ${USER_HOME}/.bashrc && \
-      echo ". ~/.bash_git" >> ${USER_HOME}/.bashrc && \
-      echo ". ~/.bash_locale" >> ${USER_HOME}/.bashrc && \
-      sed -i '1iexport TERM=xterm-256color' ${USER_HOME}/.bashrc
+      "${UHOME}/.local/share/nvim/site/autoload/plug.vim"
+    $COPY -r .config/nvim "${UHOME}/.config/"
+    $COPY .gitconfig "${UHOME}"
+    $COPY .bash_prompt "${UHOME}"
+    $COPY .bash_profile "${UHOME}"
+    $COPY .bash_git "${UHOME}"
+    $COPY .tmux.conf "${UHOME}"
+    $COPY .tmux_statusline "${UHOME}"
+    echo "alias ll='ls -l'" >> ${UHOME}/.bashrc && \
+      echo "alias la='ls -la'" >> ${UHOME}/.bashrc && \
+      echo "alias vim='nvim'" >> ${UHOME}/.bashrc && \
+      echo ". ~/.bash_prompt" >> ${UHOME}/.bashrc && \
+      echo ". ~/.bash_git" >> ${UHOME}/.bashrc && \
+      echo ". ~/.bash_locale" >> ${UHOME}/.bashrc && \
+      sed -i '1iexport TERM=xterm-256color' ${UHOME}/.bashrc
 
-    echo 'export LANG="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale && \
-      echo 'export LC_ALL="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale && \
-      echo 'export LANGUAGE="en_US.UTF-8"' >> ${USER_HOME}/.bash_locale
+    echo 'export LANG="en_US.UTF-8"' >> ${UHOME}/.bash_locale && \
+      echo 'export LC_ALL="en_US.UTF-8"' >> ${UHOME}/.bash_locale && \
+      echo 'export LANGUAGE="en_US.UTF-8"' >> ${UHOME}/.bash_locale
 
-    cd "${USER_HOME}"
-    chown -R $UNAME .gitconfig .bash_prompt .bash_profile .bash_git \
+    cd "${UHOME}"
+    chown -R $UNAME.$UNAME .gitconfig .bash_prompt .bash_profile .bash_git \
       .tmux.conf .tmux_statusline .local/share/nvim .config/nvim
+    cd $CURDIR
   fi
 }
 
