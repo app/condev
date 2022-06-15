@@ -23,6 +23,7 @@ RUN \
   neovim \
   nodejs-current \
   npm \
+  openssh \
   the_silver_searcher \
   tmux \
   tree \
