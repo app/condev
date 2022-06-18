@@ -40,7 +40,7 @@ copy_files ()
       echo ". ~/.bash_prompt" >> ${UHOME}/.bashrc && \
       echo ". ~/.bash_git" >> ${UHOME}/.bashrc && \
       echo ". ~/.bash_locale" >> ${UHOME}/.bashrc && \
-      sed -i '1iexport TERM=xterm-256color' ${UHOME}/.bashrc
+      sed -i '1iexport TERM=screen-256color' ${UHOME}/.bashrc
 
     echo 'export LANG="en_US.UTF-8"' >> ${UHOME}/.bash_locale && \
       echo 'export LC_ALL="en_US.UTF-8"' >> ${UHOME}/.bash_locale && \
@@ -64,8 +64,8 @@ copy_files ()
 }
 
 # Default values if not defined
-[ -n "$TERM" ] || TERM="xterm-256color"
-[[ "$TERM" == "xterm" ]] && TERM="xterm-256color"
+[ -n "$TERM" ] || TERM="screen-256color"
+[[ "$TERM" == "xterm" ]] && TERM="screen-256color"
 [ -n "$GIT_COMMITTER_NAME" ] || GIT_COMMITTER_NAME="app"
 [ -n "$GIT_AUTHOR_NAME" ] || GIT_AUTHOR_NAME="Andrey Paskal"
 [ -n "$EMAIL" ] || EMAIL="andrey@paskal.email"

@@ -1,4 +1,4 @@
-export TERM=xterm-256color
+export TERM=screen-256color
 alias ll='ls -l'
 alias la='ls -la'
 alias vim='nvim'
