@@ -53,7 +53,7 @@ Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key 
 
 ### Screenshots
 Solarized color theme
-![image](https://user-images.githubusercontent.com/9341/173394024-a12abbfb-13b0-4af9-b2b8-366acf93cc9b.png)  
+![Solarized](https://user-images.githubusercontent.com/9341/174473139-b0d633f4-4354-49c2-a5b3-02fdd5170334.png)
 
 Dracula color theme  
 ![Screenshot from 2022-06-19 11-37-21](https://user-images.githubusercontent.com/9341/174472858-85f8555c-aa98-4370-8d77-ab40d1da7c84.png)
