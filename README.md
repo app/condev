@@ -30,6 +30,24 @@ condev
 condev nvim [filenameInsideCurrentDirectory]
 ```
 
+### Optional setting of color theme
+
+You can choose one of six color themes. Dark or Light.  
+`dogrun, dracula, gruvbox, onedarkpro, solarized, vscode`  
+Just add this with -e parameter to alias command above
+
+```
+NVIM_THEME=vscode
+NVIM_BGCOLOR=dark
+```
+
+`NVIM_THEME` valid values are: dogrun, dracula, gruvbox, onedarkpro, solarized, vscode.  
+`NVIM_BGCOLOR` valid values are: dark or light  
+Please note `dracula` and `dogrun` is dark mode only themes.  
+And `solarized` patched up to dark-dark gray background color.
+
+### That's all
+
 You are ready for development with git, nvim, node, yarn, ag, jq, fzf commands available  
 Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings
 
