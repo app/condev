@@ -51,6 +51,14 @@ And `solarized` patched up to dark-dark gray background color.
 You are ready for development with git, nvim, node, yarn, ag, jq, fzf commands available  
 Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings
 
-### Screenshot
+### Screenshots
+Solarized color theme
+![image](https://user-images.githubusercontent.com/9341/173394024-a12abbfb-13b0-4af9-b2b8-366acf93cc9b.png)  
 
-![image](https://user-images.githubusercontent.com/9341/173394024-a12abbfb-13b0-4af9-b2b8-366acf93cc9b.png)
+Dracula color theme  
+![Screenshot from 2022-06-19 11-37-21](https://user-images.githubusercontent.com/9341/174472858-85f8555c-aa98-4370-8d77-ab40d1da7c84.png)
+
+Gruvbox color theme  
+![Grovebox](https://user-images.githubusercontent.com/9341/174473015-ab1908c6-11ee-4a7b-a0fe-fe2ad4aed372.png)
+
+
