@@ -52,6 +52,7 @@ You are ready for development with git, nvim, node, yarn, ag, jq, fzf commands a
 Look at https://github.com/app/nvim.lua to see neovim settings, plugins and key bindings
 
 ### Screenshots
+
 Solarized color theme
 ![Solarized](https://user-images.githubusercontent.com/9341/174473139-b0d633f4-4354-49c2-a5b3-02fdd5170334.png)
 
@@ -61,4 +62,4 @@ Dracula color theme
 Gruvbox color theme  
 ![Grovebox](https://user-images.githubusercontent.com/9341/174473015-ab1908c6-11ee-4a7b-a0fe-fe2ad4aed372.png)
 
-
+... and other themes are also available: `dogrun`, `onedarkpro`, `vscode`
