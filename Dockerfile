@@ -38,11 +38,8 @@ RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-${USER_HOME}/.local/share}"/nvim/site/aut
   --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # Update files ownership
 RUN chown -R ${USER}:${USER} ${USER_HOME}
-
-SHELL ["/bin/bash", "-c"]
-USER ${USER}
-# Install executables required by neovim plugins
-RUN yarn global add \
+# System-wide install executables required by neovim plugins
+RUN npm -g install \
   create-react-app \
   prettier \
   typescript-language-server \
@@ -50,6 +47,8 @@ RUN yarn global add \
   diagnostic-languageserver \
   eslint
 
+SHELL ["/bin/bash", "-c"]
+USER ${USER}
 WORKDIR ${USER_HOME}
 # Install neovim plugins with vim-plug manager command PlugInstall
 RUN nvim --headless +PlugInstall +qall 2> ${USER_HOME}/condev.log
